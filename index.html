@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEXO IA | Inteligência Operacional</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#07111f;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root{
+    --bg:#07111f;
+    --card:#0d1b2e;
+    --card2:#10243b;
+    --blue:#00c8ff;
+    --blue2:#006eff;
+    --green:#21e6a8;
+    --yellow:#ffd43b;
+    --red:#ff4d6d;
+    --text:#f5f9ff;
+    --muted:#91a4ba;
+    --border:rgba(255,255,255,.09);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:72px;
+    background:rgba(7,17,31,.88);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+    z-index:1000;
+}
+
+.nav{
+    max-width:1200px;
+    height:100%;
+    margin:auto;
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo-icon{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--blue),var(--blue2));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 25px rgba(0,200,255,.35);
+}
+
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:#b9c8d8;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--blue);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    padding:140px 25px 80px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:var(--blue);
+    opacity:.08;
+    filter:blur(100px);
+    border-radius:50%;
+    top:50px;
+    right:-100px;
+}
+
+.hero-container{
+    max-width:1200px;
+    width:100%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:70px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border:1px solid rgba(0,200,255,.25);
+    background:rgba(0,200,255,.07);
+    padding:8px 14px;
+    border-radius:30px;
+    color:var(--blue);
+    font-size:13px;
+    margin-bottom:22px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    background:var(--green);
+    border-radius:50%;
+    box-shadow:0 0 10px var(--green);
+}
+
+.hero h1{
+    font-size:clamp(48px,7vw,82px);
+    line-height:.95;
+    margin-bottom:25px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,var(--blue),#6d8cff,var(--green));
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.7;
+    max-width:620px;
+}
+
+.buttons{
+    display:flex;
+    gap:14px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:14px 22px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+    border:none;
+    transition:.3s;
+    font-size:15px;
+}
+
+.btn-primary{
+    color:#00131d;
+    background:linear-gradient(135deg,var(--blue),#4ee6ff);
+    box-shadow:0 10px 30px rgba(0,200,255,.18);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+}
+
+.btn-secondary{
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--border);
+    color:white;
+}
+
+.btn-secondary:hover{
+    border-color:var(--blue);
+}
+
+/* =========================
+   HERO CARD
+========================= */
+
+.ai-card{
+    background:linear-gradient(145deg,#0e2239,#091524);
+    border:1px solid rgba(0,200,255,.15);
+    border-radius:28px;
+    padding:25px;
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
+}
+
+.ai-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.status{
+    color:var(--green);
+    font-size:12px;
+}
+
+.ai-circle{
+    width:180px;
+    height:180px;
+    margin:25px auto;
+    border-radius:50%;
+    background:
+        radial-gradient(circle,#102d48 0 45%,transparent 46%),
+        conic-gradient(var(--blue),var(--green),var(--blue));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    box-shadow:0 0 50px rgba(0,200,255,.12);
+}
+
+.ai-circle::after{
+    content:"NEXO";
+    width:130px;
+    height:130px;
+    background:#091725;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    letter-spacing:2px;
+    color:var(--blue);
+}
+
+.ai-items{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.ai-item{
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--border);
+    padding:14px 8px;
+    border-radius:12px;
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+}
+
+.ai-item strong{
+    display:block;
+    color:white;
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+/* =========================
+   SEÇÕES
+========================= */
+
+section{
+    padding:100px 25px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title span{
+    color:var(--blue);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
+
+.section-title h2{
+    font-size:42px;
+    margin-top:10px;
+}
+
+.section-title p{
+    max-width:650px;
+    margin:15px auto;
+    color:var(--muted);
+    line-height:1.6;
+}
+
+/* =========================
+   PROBLEMA
+========================= */
+
+.problem-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(0,200,255,.3);
+}
+
+.icon{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* =========================
+   COMO FUNCIONA
+========================= */
+
+.flow{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+    align-items:center;
+}
+
+.flow-item{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px 15px;
+    text-align:center;
+}
+
+.flow-number{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:rgba(0,200,255,.1);
+    color:var(--blue);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 15px;
+    font-weight:bold;
+}
+
+.flow-item p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:8px;
+}
+
+/* =========================
+   SISTEMA
+========================= */
+
+#sistema{
+    background:#081522;
+}
+
+.system-box{
+    background:linear-gradient(145deg,#0d2136,#091522);
+    border:1px solid rgba(0,200,255,.15);
+    border-radius:25px;
+    padding:35px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.form-section{
+    background:rgba(255,255,255,.025);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+}
+
+.form-section h3{
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+label{
+    display:block;
+    color:#b7c6d5;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+select,input{
+    width:100%;
+    background:#081522;
+    color:white;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    margin-bottom:16px;
+    outline:none;
+}
+
+select:focus,input:focus{
+    border-color:var(--blue);
+}
+
+.analyze{
+    width:100%;
+    margin-top:25px;
+    padding:17px;
+    border:none;
+    border-radius:13px;
+    background:linear-gradient(90deg,var(--blue2),var(--blue));
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.analyze:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(0,110,255,.25);
+}
+
+/* =========================
+   RESULTADO
+========================= */
+
+.result{
+    display:none;
+    margin-top:30px;
+    animation:appear .5s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.result-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.risk{
+    padding:10px 18px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.low{
+    color:#00251b;
+    background:var(--green);
+}
+
+.medium{
+    color:#382d00;
+    background:var(--yellow);
+}
+
+.high{
+    color:white;
+    background:var(--red);
+}
+
+.score-box{
+    text-align:center;
+    padding:25px;
+    background:rgba(255,255,255,.035);
+    border-radius:18px;
+    margin-bottom:20px;
+}
+
+.score{
+    font-size:55px;
+    font-weight:900;
+    color:var(--blue);
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.result-card{
+    background:rgba(255,255,255,.035);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
+}
+
+.result-card h4{
+    margin-bottom:12px;
+}
+
+.result-card ul{
+    padding-left:20px;
+    color:var(--muted);
+    line-height:1.8;
+}
+
+/* =========================
+   HISTÓRICO
+========================= */
+
+.history{
+    margin-top:25px;
+}
+
+.history-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    border-bottom:1px solid var(--border);
+}
+
+.history-item small{
+    color:var(--muted);
+}
+
+/* =========================
+   DIFERENCIAIS
+========================= */
+
+.diff{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:40px 25px;
+    text-align:center;
+    color:var(--muted);
+}
+
+footer strong{
+    color:white;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    nav{
+        display:none;
+    }
+
+    .hero-container{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding-top:120px;
+    }
+
+    .problem-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .flow{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .diff{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    section{
+        padding:75px 18px;
+    }
+
+    .hero{
+        padding-left:18px;
+        padding-right:18px;
+    }
+
+    .hero h1{
+        font-size:52px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .problem-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-title h2{
+        font-size:32px;
+    }
+
+    .system-box{
+        padding:18px;
+    }
+
+    .result-grid{
+        grid-template-columns:1fr;
+    }
+
+    .ai-items{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+<div class="nav">
+
+    <div class="logo">
+        <div class="logo-icon">N</div>
+        NEXO IA
+    </div>
+
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#problema">Problema</a>
+        <a href="#funciona">Como funciona</a>
+        <a href="#sistema">Sistema</a>
+        <a href="#impacto">Impacto</a>
+    </nav>
+
+</div>
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="inicio">
+
+<div class="hero-container">
+
+<div>
+
+    <div class="badge">
+        <span class="dot"></span>
+        SISTEMA INTELIGENTE
+    </div>
+
+    <h1>
+        NEXO<br>
+        <span class="gradient">IA</span>
+    </h1>
+
+    <p>
+        Núcleo de Excelência Operacional com Inteligência Artificial.
+        Uma solução que conecta <strong>pessoas, tarefas e ambientes</strong>
+        para apoiar decisões mais inteligentes, seguras e eficientes.
+    </p>
+
+    <div class="buttons">
+
+        <a href="#sistema" class="btn btn-primary">
+            🚀 Iniciar análise
+        </a>
+
+        <a href="#funciona" class="btn btn-secondary">
+            Como funciona
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="ai-card">
+
+    <div class="ai-top">
+        <strong>PAINEL NEXO</strong>
+        <span class="status">● SISTEMA ONLINE</span>
+    </div>
+
+    <div class="ai-circle"></div>
+
+    <div class="ai-items">
+
+        <div class="ai-item">
+            <strong>👤</strong>
+            Pessoa
+        </div>
+
+        <div class="ai-item">
+            <strong>⚙️</strong>
+            Tarefa
+        </div>
+
+        <div class="ai-item">
+            <strong>🌎</strong>
+            Ambiente
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     PROBLEMA
+========================= -->
+
+<section id="problema">
+
+<div class="container">
+
+<div class="section-title">
+
+    <span>O desafio</span>
+
+    <h2>Por que o NEXO existe?</h2>
+
+    <p>
+        Processos desconectados podem dificultar a identificação
+        de riscos e a tomada de decisões.
+    </p>
+
+</div>
+
+
+<div class="problem-grid">
+
+<div class="card">
+    <div class="icon">📋</div>
+    <h3>Processos manuais</h3>
+    <p>
+        Informações podem ficar espalhadas e depender
+        de análises realizadas manualmente.
+    </p>
+</div>
+
+<div class="card">
+    <div class="icon">🔗</div>
+    <h3>Falta de integração</h3>
+    <p>
+        Pessoas, tarefas e condições do ambiente nem
+        sempre são analisadas em conjunto.
+    </p>
+</div>
+
+<div class="card">
+    <div class="icon">⚠️</div>
+    <h3>Decisões reativas</h3>
+    <p>
+        A identificação de problemas pode acontecer
+        somente depois que eles surgem.
+    </p>
+</div>
+
+<div class="card">
+    <div class="icon">📊</div>
+    <h3>Dados dispersos</h3>
+    <p>
+        Informações sem conexão dificultam a criação
+        de uma visão operacional.
+    </p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     COMO FUNCIONA
+========================= -->
+
+<section id="funciona">
+
+<div class="container">
+
+<div class="section-title">
+
+    <span>Funcionamento</span>
+
+    <h2>Como o NEXO funciona?</h2>
+
+    <p>
+        O sistema combina informações para gerar uma análise
+        e uma recomendação automática.
+    </p>
+
+</div>
+
+
+<div class="flow">
+
+<div class="flow-item">
+    <div class="flow-number">1</div>
+    <strong>Pessoa</strong>
+    <p>Perfil e experiência.</p>
+</div>
+
+<div class="flow-item">
+    <div class="flow-number">2</div>
+    <strong>Tarefa</strong>
+    <p>Complexidade e atividade.</p>
+</div>
+
+<div class="flow-item">
+    <div class="flow-number">3</div>
+    <strong>Ambiente</strong>
+    <p>Condições do local.</p>
+</div>
+
+<div class="flow-item">
+    <div class="flow-number">4</div>
+    <strong>Análise IA</strong>
+    <p>Processamento dos fatores.</p>
+</div>
+
+<div class="flow-item">
+    <div class="flow-number">5</div>
+    <strong>Decisão</strong>
+    <p>Recomendação inteligente.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     SISTEMA
+========================= -->
+
+<section id="sistema">
+
+<div class="container">
+
+<div class="section-title">
+
+    <span>Protótipo funcional</span>
+
+    <h2>Faça uma análise</h2>
+
+    <p>
+        Preencha as informações abaixo e deixe o NEXO
+        analisar a combinação Pessoa × Tarefa × Ambiente.
+    </p>
+
+</div>
+
+
+<div class="system-box">
+
+<div class="form-grid">
+
+<!-- PESSOA -->
+
+<div class="form-section">
+
+<h3>👤 Pessoa</h3>
+
+<label>Experiência</label>
+
+<select id="experiencia">
+
+<option value="1">Iniciante</option>
+<option value="2">Intermediário</option>
+<option value="3">Experiente</option>
+
+</select>
+
+
+<label>Nível de treinamento</label>
+
+<select id="treinamento">
+
+<option value="1">Baixo</option>
+<option value="2">Médio</option>
+<option value="3">Alto</option>
+
+</select>
+
+
+<label>Fadiga</label>
+
+<select id="fadiga">
+
+<option value="3">Alta</option>
+<option value="2">Moderada</option>
+<option value="1">Baixa</option>
+
+</select>
+
+</div>
+
+
+<!-- TAREFA -->
+
+<div class="form-section">
+
+<h3>⚙️ Tarefa</h3>
+
+<label>Complexidade</label>
+
+<select id="complexidade">
+
+<option value="3">Alta</option>
+<option value="2">Média</option>
+<option value="1">Baixa</option>
+
+</select>
+
+
+<label>Pressão de tempo</label>
+
+<select id="pressao">
+
+<option value="3">Alta</option>
+<option value="2">Moderada</option>
+<option value="1">Baixa</option>
+
+</select>
+
+
+<label>Necessidade de precisão</label>
+
+<select id="precisao">
+
+<option value="3">Alta</option>
+<option value="2">Média</option>
+<option value="1">Baixa</option>
+
+</select>
+
+</div>
+
+
+<!-- AMBIENTE -->
+
+<div class="form-section">
+
+<h3>🌎 Ambiente</h3>
+
+<label>Ruído</label>
+
+<select id="ruido">
+
+<option value="3">Alto</option>
+<option value="2">Moderado</option>
+<option value="1">Baixo</option>
+
+</select>
+
+
+<label>Iluminação</label>
+
+<select id="iluminacao">
+
+<option value="3">Ruim</option>
+<option value="2">Regular</option>
+<option value="1">Boa</option>
+
+</select>
+
+
+<label>Condições gerais</label>
+
+<select id="condicoes">
+
+<option value="3">Desfavoráveis</option>
+<option value="2">Regulares</option>
+<option value="1">Favoráveis</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<button class="analyze" onclick="analisar()">
+    🤖 ANALISAR COM NEXO IA
+</button>
+
+
+<!-- RESULTADO -->
+
+<div class="result" id="resultado">
+
+<div class="result-header">
+
+    <div>
+        <small style="color:var(--muted)">
+            RESULTADO DA ANÁLISE
+        </small>
+
+        <h2 id="tituloResultado">
+            Análise concluída
+        </h2>
+    </div>
+
+    <div class="risk" id="nivelRisco">
+        MODERADO
+    </div>
+
+</div>
+
+
+<div class="score-box">
+
+    <div class="score" id="pontuacao">
+        0
+    </div>
+
+    <div style="color:var(--muted)">
+        Pontuação de atenção operacional
+    </div>
+
+</div>
+
+
+<div class="result-grid">
+
+<div class="result-card">
+
+<h4>🔎 Fatores identificados</h4>
+
+<ul id="fatores"></ul>
+
+</div>
+
+
+<div class="result-card">
+
+<h4>💡 Recomendação do NEXO</h4>
+
+<p id="recomendacao"
+style="color:var(--muted);line-height:1.7">
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- HISTÓRICO -->
+
+<div class="history">
+
+<h3 style="margin:35px 0 10px">
+📋 Histórico de análises
+</h3>
+
+<div id="historico"></div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     IMPACTO
+========================= -->
+
+<section id="impacto">
+
+<div class="container">
+
+<div class="section-title">
+
+<span>Impacto</span>
+
+<h2>O que o NEXO busca transformar?</h2>
+
+<p>
+A proposta é utilizar tecnologia para apoiar uma operação
+mais integrada, preventiva e orientada por dados.
+</p>
+
+</div>
+
+
+<div class="diff">
+
+<div class="card">
+
+<div class="icon">🧠</div>
+
+<h3>Decisões inteligentes</h3>
+
+<p>
+Informações combinadas para apoiar análises
+mais rápidas e estruturadas.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🛡️</div>
+
+<h3>Prevenção</h3>
+
+<p>
+Identificação antecipada de fatores que merecem
+atenção antes da execução da tarefa.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">⚡</div>
+
+<h3>Eficiência</h3>
+
+<p>
+Uma visão integrada para reduzir decisões
+fragmentadas e melhorar processos.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<strong>NEXO IA</strong>
+
+<br><br>
+
+Núcleo de Excelência Operacional com Inteligência Artificial
+
+<br><br>
+
+Fúria Nordestina • SENAI
+
+<br><br>
+
+© <span id="ano"></span> NEXO IA
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+document.getElementById("ano").textContent =
+new Date().getFullYear();
+
+
+/* =========================
+   ANÁLISE
+========================= */
+
+function analisar(){
+
+    let experiencia =
+    Number(document.getElementById("experiencia").value);
+
+    let treinamento =
+    Number(document.getElementById("treinamento").value);
+
+    let fadiga =
+    Number(document.getElementById("fadiga").value);
+
+    let complexidade =
+    Number(document.getElementById("complexidade").value);
+
+    let pressao =
+    Number(document.getElementById("pressao").value);
+
+    let precisao =
+    Number(document.getElementById("precisao").value);
+
+    let ruido =
+    Number(document.getElementById("ruido").value);
+
+    let iluminacao =
+    Number(document.getElementById("iluminacao").value);
+
+    let condicoes =
+    Number(document.getElementById("condicoes").value);
+
+
+    /*
+       CÁLCULO SIMPLIFICADO DO PROTÓTIPO
+
+       Quanto maior o valor:
+       maior a necessidade de atenção.
+
+       Experiência e treinamento
+       reduzem o risco.
+    */
+
+    let pessoa =
+        fadiga +
+        (4 - experiencia) +
+        (4 - treinamento);
+
+    let tarefa =
+        complexidade +
+        pressao +
+        precisao;
+
+    let ambiente =
+        ruido +
+        iluminacao +
+        condicoes;
+
+
+    let total =
+        pessoa +
+        tarefa +
+        ambiente;
+
+
+    /*
+       Normalização
+       máximo aproximado = 27
+    */
+
+    let porcentagem =
+        Math.round((total / 27) * 100);
+
+
+    if(porcentagem > 100){
+        porcentagem = 100;
+    }
+
+
+    let nivel;
+    let classe;
+    let recomendacao;
+    let fatores = [];
+
+
+    /* FATORES */
+
+    if(experiencia === 1){
+        fatores.push(
+            "Baixa experiência para a atividade."
+        );
+    }
+
+    if(treinamento === 1){
+        fatores.push(
+            "Nível de treinamento insuficiente."
+        );
+    }
+
+    if(fadiga === 3){
+        fatores.push(
+            "Nível elevado de fadiga."
+        );
+    }
+
+    if(complexidade === 3){
+        fatores.push(
+            "Tarefa apresenta alta complexidade."
+        );
+    }
+
+    if(pressao === 3){
+        fatores.push(
+            "Existe alta pressão de tempo."
+        );
+    }
+
+    if(precisao === 3){
+        fatores.push(
+            "A tarefa exige alto nível de precisão."
+        );
+    }
+
+    if(ruido === 3){
+        fatores.push(
+            "Ambiente apresenta alto nível de ruído."
+        );
+    }
+
+    if(iluminacao === 3){
+        fatores.push(
+            "Condições de iluminação precisam de atenção."
+        );
+    }
+
+    if(condicoes === 3){
+        fatores.push(
+            "Condições gerais do ambiente são desfavoráveis."
+        );
+    }
+
+
+    if(fatores.length === 0){
+
+        fatores.push(
+            "Nenhum fator crítico foi identificado."
+        );
+
+    }
+
+
+    /* NÍVEL */
+
+    if(porcentagem < 40){
+
+        nivel = "BAIXO";
+        classe = "low";
+
+        recomendacao =
+        "A combinação analisada apresenta baixa necessidade de atenção. " +
+        "A atividade pode prosseguir mantendo os procedimentos e boas práticas existentes.";
+
+    }
+
+    else if(porcentagem < 70){
+
+        nivel = "MODERADO";
+        classe = "medium";
+
+        recomendacao =
+        "O NEXO identificou fatores que merecem atenção. " +
+        "Recomenda-se verificar as condições antes da execução e realizar acompanhamento.";
+
+    }
+
+    else{
+
+        nivel = "ALTO";
+        classe = "high";
+
+        recomendacao =
+        "O NEXO identificou uma combinação elevada de fatores de atenção. " +
+        "Recomenda-se revisar as condições da atividade, reforçar a orientação " +
+        "e avaliar medidas preventivas antes da execução.";
+
+    }
+
+
+    /* MOSTRAR RESULTADO */
+
+    let resultado =
+    document.getElementById("resultado");
+
+    resultado.style.display = "block";
+
+
+    document.getElementById("pontuacao")
+    .textContent = porcentagem + "%";
+
+
+    let badge =
+    document.getElementById("nivelRisco");
+
+    badge.textContent = nivel;
+
+    badge.className =
+    "risk " + classe;
+
+
+    document.getElementById("tituloResultado")
+    .textContent =
+    "Análise " + nivel.toLowerCase();
+
+
+    document.getElementById("recomendacao")
+    .textContent =
+    recomendacao;
+
+
+    let lista =
+    document.getElementById("fatores");
+
+    lista.innerHTML = "";
+
+
+    fatores.forEach(function(fator){
+
+        let li =
+        document.createElement("li");
+
+        li.textContent = fator;
+
+        lista.appendChild(li);
+
+    });
+
+
+    salvarHistorico(
+        nivel,
+        porcentagem
+    );
+
+
+    resultado.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
+}
+
+
+/* =========================
+   HISTÓRICO
+========================= */
+
+function salvarHistorico(
+    nivel,
+    porcentagem
+){
+
+    let historico =
+    JSON.parse(
+        localStorage.getItem("nexoHistorico")
+    ) || [];
+
+
+    historico.unshift({
+
+        nivel:nivel,
+
+        porcentagem:porcentagem,
+
+        data:new Date().toLocaleString("pt-BR")
+
+    });
+
+
+    historico =
+    historico.slice(0,5);
+
+
+    localStorage.setItem(
+        "nexoHistorico",
+        JSON.stringify(historico)
+    );
+
+
+    mostrarHistorico();
+
+}
+
+
+function mostrarHistorico(){
+
+    let historico =
+    JSON.parse(
+        localStorage.getItem("nexoHistorico")
+    ) || [];
+
+
+    let container =
+    document.getElementById("historico");
+
+
+    if(historico.length === 0){
+
+        container.innerHTML =
+        '<p style="color:var(--muted);font-size:14px">Nenhuma análise realizada ainda.</p>';
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    historico.forEach(function(item){
+
+        let div =
+        document.createElement("div");
+
+        div.className =
+        "history-item";
+
+
+        let classe =
+        item.nivel === "BAIXO"
+        ? "low"
+        : item.nivel === "MODERADO"
+        ? "medium"
+        : "high";
+
+
+        div.innerHTML = `
+
+            <div>
+
+                <strong>
+                    Análise ${item.nivel}
+                </strong>
+
+                <br>
+
+                <small>
+                    ${item.data}
+                </small>
+
+            </div>
+
+            <span class="risk ${classe}">
+                ${item.porcentagem}%
+            </span>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================
+   INICIALIZAR
+========================= */
+
+mostrarHistorico();
+
+</script>
+
+</body>
+</html>
